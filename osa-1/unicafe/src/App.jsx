@@ -9,6 +9,32 @@ const Button = (props) => {
   );
 };
 
+const Statistics = ({ good, neutral, bad }) => {
+  const total = good + neutral + bad;
+  const average = total === 0 ? 0 : (good - bad) / total;
+  const positivePercentage = total === 0 ? 0 : (good / total) * 100;
+
+  console.log("Statistics - Total Feedback:", total);
+  console.log("Statistics - Average Feedback:", average);
+  console.log("Statistics - Positive Feedback Percentage:", positivePercentage)
+
+  return (
+    <div>
+      <h2>statistics</h2>
+        <div>
+        <ul style={{ listStyleType: "none", padding: 0, margin: 0 }}>
+          <li>good {good}</li>
+          <li>neutral {neutral}</li>
+          <li>bad {bad}</li>
+          <li>all {total}</li>
+          <li>average {average}</li>
+          <li>positive {positivePercentage} %</li>
+        </ul>
+        </div>
+    </div>
+  );
+};
+
 const App = () => {
  
   const [good, setGood] = useState(0);
@@ -40,10 +66,7 @@ const App = () => {
       <Button handleClick={handleGood} text="good"/>
       <Button handleClick={handleNeutral} text="neutral"/>
       <Button handleClick={handleBad} text="bad"/>
-      <h2>statistics</h2>
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
+      <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
   );
 };
