@@ -7,8 +7,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Node modules
-node_modules/
+node_modules
+dist
+dist-ssr
+*.local
 
 # Editor directories and files
 .vscode/*
@@ -20,7 +22,3 @@ node_modules/
 *.njsproj
 *.sln
 *.sw?
-
-# Other
-
-.vite/
