@@ -28,13 +28,33 @@ const App = () => {
     setVotes(votesCopy);
   };
 
+  // MOST VOTES COMPONENT
+  const MostVotedAnecdote = ({ anecdotes, votes }) => {
+    const mostVoted = Math.max(...votes);
+    const mostVotedIndex = votes.indexOf(mostVoted);
+  
+    if (mostVoted === 0) return <p>No votes yet</p>;
+  
+    return (
+      <div>
+        <p>{anecdotes[mostVotedIndex]}</p>
+        <p>has {mostVoted} votes</p>
+      </div>
+    );
+  };
+
   // set votes to display at same index anecdotes is at
   return (
     <div>
+      <h2>Anecdote of the day</h2>
+
       <p>{anecdotes[selected]}</p>
       <p>has {votes[selected]} votes</p>
       <button onClick={handleVote}>vote</button>
       <button onClick={handleAnecdote}>next anecdote</button>
+
+      <h2>Anecdote with most votes</h2>
+      <MostVotedAnecdote anecdotes={anecdotes} votes={votes} />
     </div>
   );
 };
