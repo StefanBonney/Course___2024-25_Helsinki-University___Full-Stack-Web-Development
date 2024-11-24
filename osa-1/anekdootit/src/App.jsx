@@ -12,16 +12,28 @@ const App = () => {
     'The only way to go fast, is to go well.'
   ]
    
+  // STATE
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0));
 
+  // HANDLE CHANGE
   const handleAnecdote = () => {
     const randomAnecdote = Math.floor(Math.random() * anecdotes.length);
     setSelected(randomAnecdote);
   };
+  // set votes to add count at same index anecdotes is at
+  const handleVote = () => {
+    const votesCopy = [...votes];
+    votesCopy[selected] += 1;
+    setVotes(votesCopy);
+  };
 
+  // set votes to display at same index anecdotes is at
   return (
     <div>
       <p>{anecdotes[selected]}</p>
+      <p>has {votes[selected]} votes</p>
+      <button onClick={handleVote}>vote</button>
       <button onClick={handleAnecdote}>next anecdote</button>
     </div>
   );
