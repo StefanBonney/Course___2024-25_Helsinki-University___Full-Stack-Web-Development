@@ -50,14 +50,14 @@ const Part = ({ name, exercises }) => {
   );
 };
 
-/*
-const Total = (props) => {
-  console.log('Total', props)
+
+const Total = ({course}) => {
+  console.log('Total (course)', course)
   return (
-    <p>Number of exercises {props.course.parts[0].exercises + props.course.parts[1].exercises + props.course.parts[2].exercises}</p>
+    <p><b> total of {course.parts[0].exercises + course.parts[1].exercises + course.parts[2].exercises + course.parts[3].exercises} exercises </b></p>
   )
 }
-*/
+
 
 
 const App = () => {
@@ -78,6 +78,11 @@ const App = () => {
         name: 'State of a component',
         exercises: 14,
         id: 3
+      },
+      {
+        name: 'Redux',
+        exercises: 11,
+        id: 4
       }
     ]
   }
@@ -85,6 +90,7 @@ const App = () => {
   return (
     <div>
       <Course course={course} />
+      <Total course={course} />
     </div>
   )
 }
