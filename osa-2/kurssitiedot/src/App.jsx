@@ -51,10 +51,18 @@ const Part = ({ name, exercises }) => {
 };
 
 
-const Total = ({course}) => {
-  console.log('Total (course)', course)
+const Total = ({parts}) => {
+  console.log('Total (parts)', parts)
   return (
-    <p><b> total of {course.parts[0].exercises + course.parts[1].exercises + course.parts[2].exercises + course.parts[3].exercises} exercises </b></p>
+    //<p><b> total of {parts.reduce((sum, part) => sum + part.exercises, 0)} exercises </b></p>
+    <p>
+      <b>
+        total of {parts.reduce((sum, part) => {
+          console.log('Sum:', sum, 'Adding part:', part);
+          return sum + part.exercises;
+        }, 0)} exercises
+      </b>
+    </p>
   )
 }
 
@@ -90,7 +98,7 @@ const App = () => {
   return (
     <div>
       <Course course={course} />
-      <Total course={course} />
+      <Total parts={course.parts} />
     </div>
   )
 }
