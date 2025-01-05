@@ -14,6 +14,12 @@ const App = () => {
   const addPerson = (event) => {
     event.preventDefault();
 
+    const existingPerson = persons.find(person => person.name === newName);
+      if (existingPerson) {
+        alert(`${newName} is already added to phonebook`);
+        return;
+      }
+
     const newPerson = { name: newName };
 
     // debug: log new person & list
@@ -39,7 +45,7 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      <ul>
+      <ul style={{ listStyle: 'none', padding: 0 }}>
         {persons.map((person) => (
           <li key={person.name}>{person.name}</li>
         ))}
