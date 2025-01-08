@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 
 
@@ -32,21 +32,22 @@ const PersonsList = ({ persons }) => (
 
 //===========================================================[App]
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: 'Arto Hellas', number: '040-123456' },
-    { name: 'Ada Lovelace', number: '39-44-5323523' },
-    { name: 'Dan Abramov', number: '12-43-234345' },
-    { name: 'Mary Poppendieck', number: '39-23-6423122' }
-  ])
+  const [persons, setPersons] = useState([])
   const [newName, setNewName] = useState('');
   const [newNumber, setNewNumber] = useState('');
   const [newFilter, setNewFilter] = useState('');
 
-  // debug: state after update (post-render)
-  //useEffect(() => {
-  //  console.log('Current state:', { persons, newName, newNumber });
-  //}, [persons, newName, newNumber]);
-
+  useEffect(() => {
+    axios.get('http://localhost:3001/persons')
+      .then(response => {
+        console.log('Response:', response); 
+        console.log('Data:', response.data);   
+        setPersons(response.data); 
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []); ; // empty makes run only once after first render
 
   const handleNameChange = (event) => {setNewName(event.target.value)}
   const handleNumberChange = (event) => {setNewNumber(event.target.value)}
